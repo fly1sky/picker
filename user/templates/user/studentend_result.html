@@ -1,0 +1,8 @@
+<h1>{{ seu_user }}同学，你好</h1>
+
+<h2>你选择的导师：<h2>
+{{ seu_user.student.my_supervisor }}
+{% if seu_user.student.is_picked %}<p>也选择了你，恭喜！</p>
+{% else %}<p>正在审核你的申请。祝君好运！</p>
+{% endif %}
+

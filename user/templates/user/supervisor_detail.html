@@ -1,0 +1,13 @@
+<h1>{{ seu_user }}同学，你好</h1>
+<a href="{% url 'user:logout' %}">注销</a>
+<p>请选择你心仪的导师</p>
+
+
+<form action="{% url 'user:pick_supervisor' %}" method="post">
+{% csrf_token %}
+{% for supervisor in supervisors %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ supervisor.pk }}">
+    <label for="choice{{ forloop.counter }}">{{ supervisor.auth_user.username }}</label><br>
+{% endfor %}
+<input type="submit" value="Pick">
+</form>

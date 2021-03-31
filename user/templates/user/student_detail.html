@@ -1,0 +1,20 @@
+<h1>{{ seu_user }}老师，你好</h1>
+<a href="{% url 'user:logout' %}">注销</a>
+<p>你还可挑选<strong>{{ seu_user.supervisor.headcount }}</strong>名研究生</p>
+
+<p>你已选择：</p>
+<ul>
+{% for student in picked_list %}
+    <li>{{student.auth_user.username}}</li>
+{% endfor %}
+</ul>
+<p>请选择你心仪的学生</p>
+
+<form action="{% url 'user:pick_student' %}" method="post">
+{% csrf_token %}
+{% for student in waiting_list %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ student.pk }}">
+    <label for="choice{{ forloop.counter }}">{{ student.auth_user.username }}</label><br>
+{% endfor %}
+<input type="submit" value="Pick">
+</form>
